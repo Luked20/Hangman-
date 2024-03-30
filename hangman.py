@@ -1,9 +1,10 @@
-
+#import das biblotecas 
 import pygame
 import sys
 from pygame import color
 import random 
 
+#ASCII DAS FASES 
 HANGMANPICS = ['''
   +---+
   |   |
@@ -54,7 +55,7 @@ HANGMANPICS = ['''
  / \  |
       |
 =========''']
-
+#banco de palavras para serem usadas(apenas animais)
 words = ('ant baboon badger bat bear beaver camel cat clam cobra cougar '
          'coyote crow deer dog donkey duck eagle ferret fox frog goat '
          'goose hawk lion lizard llama mole monkey moose mouse mule newt '
@@ -63,22 +64,22 @@ words = ('ant baboon badger bat bear beaver camel cat clam cobra cougar '
          'stork swan tiger toad trout turkey turtle weasel whale wolf '
          'wombat zebra ').split()
 
-# Initialize pygame
+# Inicialização do pygame
 pygame.init()
 
-# Set up the screen
+# parametros da tela 
 WIDTH, HEIGHT = 800, 600
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Hangman")
 
-# Colors
+# Cores
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 
-# Font
+# Fonte
 font = pygame.font.Font(None, 32)
 
-# Textbox properties
+# Propriedades do textbox 
 textbox_width = 400
 textbox_height = 40
 textbox_rect = pygame.Rect((WIDTH - textbox_width) // 2, (HEIGHT - textbox_height) // 2, textbox_width, textbox_height)
@@ -88,6 +89,7 @@ text = ''
 cursor_visible = True
 cursor_timer = 0
 
+#variaveis importantes 
 tentativas =  6 
 mensagem = f'Tentativas: {tentativas}'
 text_font = pygame.font.SysFont('Arial', 24, True, True)
@@ -150,18 +152,18 @@ while running:
     else:
         print(f"jogo terminado")     
       
-    # Draw textbox
+    # textbox
     pygame.draw.rect(screen, textbox_color, textbox_rect, 2)
     rendered_text = font.render(text, True, text_color)
     screen.blit(rendered_text, (textbox_rect.x + 5, textbox_rect.y + 5))
 
-    # Draw cursor
+    #cursor
     if cursor_visible:
         cursor_rect = pygame.Rect(textbox_rect.x + 5 + rendered_text.get_width(), textbox_rect.y + 5, 2, rendered_text.get_height())
         pygame.draw.rect(screen, BLACK, cursor_rect)
 
-    # Update the display
-    # Control cursor visibility
+    # display
+    # Controle do cursor 
     if pygame.time.get_ticks() - cursor_timer > 500:
         cursor_visible = not cursor_visible
         cursor_timer = pygame.time.get_ticks()
@@ -174,13 +176,13 @@ while running:
    
         
      
-
+    #se voce errar todas jogo fecha 
     if(tentativas == 0):
       pygame.quit()
          
     
     pygame.display.flip()
 
-# Quit pygame
+# Sair do pygame
 pygame.quit()
 sys.exit()
